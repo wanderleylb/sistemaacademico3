@@ -4,29 +4,28 @@ function testa_form() {
 
     
     // Obtém o valor do campo "aluno" do formulário "formalunos"
-    var a = document.forms["formalunos"]["aluno"].value;
+	
+     var aluno = document.forms["formalunos"]["aluno"].value;
 
     // Obtém o valor do campo "cpf" do formulário "formalunos"
-    var c = document.forms["formalunos"]["cpf"].value;
+    var cpf = document.forms["formalunos"]["cpf"].value;
 
-    // Verifica se o campo "aluno" está vazio ou não foi preenchido
-	// Verificação de valores usando trim(): trim() remove espaços em branco no início
-    //	e no final da string, garantindo que os campos não sejam aceitos como válidos se contiverem apenas espaços.
-	
-	
-    if (a == null || a === "") {
+
+   	
+    // Verifica se o campo "aluno" está vazio
+    if (aluno == "") {
         // Exibe um alerta informando que o nome do aluno deve ser preenchido
-        alert("Nome de aluno precisa ser informado");
+         alert("Nome do aluno precisa ser informado.");
 
         // Envia o cursor para o campo aluno do formulário "formalunos".
-        document.forms["formalunos"]["aluno"].focus();
+         document.forms["formalunos"]["aluno"].focus();
 
         // Impede o envio do formulário, retornando false
         return false;        
     }
     
-    // Verifica se o campo "cpf" está vazio ou não foi preenchido
-    if (c == null || c === "") {
+   // Verifica se o campo "cpf" está vazio
+    if (cpf == "") {
         // Exibe um alerta informando que o CPF do aluno deve ser preenchido
         alert("CPF do aluno precisa ser informado");
 
@@ -37,18 +36,10 @@ function testa_form() {
         return false;        
     }
 
-    // Se todas as validações passarem, o formulário é enviado
-    document.forms["formalunos"].submit();
+// Se todas as validações passarem, permite o envio
+    return true;
 }
-/*
-Nulo (null): Ausência de valor
-Imagine que você tem um espaço para um livro numa estante, mas não colocou nenhum livro lá. Esse espaço está null, ou seja, está vazio sem qualquer livro.
 
-Vazio (""): Não possui conteúdo
-Agora, imagine que você colocou um caderno na estante, mas todas as páginas estão em branco. O caderno existe (não é null), mas não tem nada escrito nele, 
-então está "vazio" de conteúdo.
-
-*/
 
 //FUNÇÃO PARA AS MÁSCARA
 
@@ -58,14 +49,19 @@ function mascara(input) {
   var v = input.value;
 
  //A função isNaN() determina se o valor é NaN ou não.
-  //NaN - Not a number, não é um número.
+  //NaN - Not a number, verifica se o último caractere digitado não é um número.
   
-  // Verifica se o último caractere digitado não é um número.
   // Se não for um número, remove o último caractere e retorna,
+
   // o que impede a entrada de caracteres inválidos.
-  if (isNaN(v[v.length - 1])) { // impede entrar outro caractere que não seja número
-    input.value = v.substring(0, v.length - 1);
+  if (isNaN(v[v.length - 1])) { // Acessa o último caractere da string e verifica se é número.
+    
+	input.value = v.substring(0, v.length - 1); //Começa pelo primeiro caracter 0
+	                                            //Remove o último caracter da string -1.
+		
     return;
+	// A instrução return encerra a execução da função imediatamente. 
+	// Isso impede que o restante do código na função seja executado.
   }
 
   // Obtém o tipo de máscara a partir do atributo data-mask do elemento
@@ -108,6 +104,9 @@ function mascara(input) {
     if (v.length === 9) input.value += "-";
   }
 }
+
+
+
 
 
 
